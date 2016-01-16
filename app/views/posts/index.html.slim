@@ -6,15 +6,14 @@
       thead
         tr
           th Title
-          th Date Posted on
-          th Content of Post
-          th colspan="2"
+          th Text
+          th
       tbody
        - @posts.each do |post|
          tr
            td = post.title
            td = post.body
-           td = link_to 'Edit', edit_post_path(post), class: 'btn btn-warning'
-           td = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-
-    = link_to 'New Post', new_post_path, class: 'btn btn-primary'
+           td.pull-right.btn-toolbar
+             = link_to 'Edit', edit_post_path(post), class: 'btn btn-warning btn-sm'
+             = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+    = link_to 'Create Post', new_post_path, class: 'btn btn-primary'
