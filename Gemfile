@@ -10,13 +10,13 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'rspec'
 gem 'bootstrap'
 gem 'simple_form'
 gem 'slim'
 
 group :development, :test do
   gem 'byebug'
+  gem 'rspec-rails'
 end
 
 group :development do
