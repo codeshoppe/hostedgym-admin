@@ -1,8 +1,6 @@
 .row
   .col-xs-12
-    h2
-      = "Posts "
-      = link_to 'Create Post', new_post_path, class: 'btn btn-primary btn-sm'
+    h2 Posts
 
     table.table.table-striped
       thead
@@ -18,3 +16,4 @@
            td.pull-right.btn-toolbar
              = link_to 'Edit', edit_post_path(post), class: 'btn btn-warning btn-sm'
              = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+    = link_to 'Create Post', new_post_path, class: 'btn btn-primary'
