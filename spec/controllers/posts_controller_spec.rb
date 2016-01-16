@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
+  let!(:valid_post) {
+    FactoryGirl.create(:post)
+  }
+
   let(:invalid_attributes) {
     { title: '' }
   }
@@ -12,7 +16,6 @@ RSpec.describe PostsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all posts as @posts" do
-      valid_post = FactoryGirl.create(:post)
       get :index, {}
       expect(assigns(:posts)).to eq([valid_post])
     end
@@ -27,7 +30,6 @@ RSpec.describe PostsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested post as @post" do
-      valid_post = FactoryGirl.create(:post)
       get :edit, {:id => valid_post.to_param}
       expect(assigns(:post)).to eq(valid_post)
     end
@@ -77,22 +79,18 @@ RSpec.describe PostsController, type: :controller do
       }
 
       it "updates the requested post" do
-        valid_post = FactoryGirl.create(:post)
         put :update, {:id => valid_post.to_param, :post => new_attributes}
         valid_post.reload
         expect(valid_post.title).to eq(new_attributes[:title])
       end
 
       it "assigns the requested post as @post" do
-        valid_post = FactoryGirl.create(:post)
 
         put :update, {:id => valid_post.to_param, :post => valid_attributes}
         expect(assigns(:post)).to eq(valid_post)
       end
 
       it "redirects to the post" do
-        valid_post = FactoryGirl.create(:post)
-
         put :update, {:id => valid_post.to_param, :post => valid_attributes}
         expect(response).to redirect_to posts_path
       end
@@ -100,15 +98,11 @@ RSpec.describe PostsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the post as @post" do
-        valid_post = FactoryGirl.create(:post)
-
         put :update, {:id => valid_post.to_param, :post => invalid_attributes}
         expect(assigns(:post)).to eq(valid_post)
       end
 
       it "re-renders the 'edit' template" do
-        valid_post = FactoryGirl.create(:post)
-
         put :update, {:id => valid_post.to_param, :post => invalid_attributes}
         expect(response).to render_template("edit")
       end
@@ -117,16 +111,12 @@ RSpec.describe PostsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested post" do
-      valid_post = FactoryGirl.create(:post)
-
       expect {
         delete :destroy, {:id => valid_post.to_param}
       }.to change(Post, :count).by(-1)
     end
 
     it "redirects to the posts list" do
-      valid_post = FactoryGirl.create(:post)
-
       delete :destroy, {:id => valid_post.to_param}
       expect(response).to redirect_to(posts_url)
     end
