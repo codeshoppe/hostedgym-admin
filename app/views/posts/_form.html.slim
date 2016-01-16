@@ -1,0 +1,12 @@
+= simple_form_for @post do |f|
+  .alert.alert-error role="alert"
+    = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :posted_on
+    = f.input :body
+
+  .form-actions
+    = link_to 'Back', posts_path, class: 'btn btn-danger'
+    = f.button :submit
