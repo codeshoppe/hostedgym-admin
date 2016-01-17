@@ -18,3 +18,5 @@
 
 # Ignore gem folder
 .gems
+
+/config/application.yml

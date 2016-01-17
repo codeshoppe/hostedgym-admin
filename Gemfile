@@ -13,7 +13,7 @@ gem 'simple_form'
 gem 'slim'
 gem 'factory_girl_rails'
 gem 'shoulda-matchers'
-gem 'pg'
+gem 'sqlite3'
 
 group :development, :test do
   gem 'byebug'
@@ -25,3 +25,6 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem 'pg'
+end
