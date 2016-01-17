@@ -1,4 +1,4 @@
-= simple_form_for @post do |f|
+= simple_form_for @article do |f|
   .alert.alert-error role="alert"
     = f.error_notification
 
@@ -7,5 +7,5 @@
     = f.input :body
 
   .form-actions.btn-toolbar
-    = link_to 'Back', posts_path, class: 'btn btn-danger'
+    = link_to 'Back', articles_path, class: 'btn btn-danger'
     = f.button :submit
