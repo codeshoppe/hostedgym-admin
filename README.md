@@ -1,2 +1,12 @@
-# posts_to_json
-Allows someone to create a bunch of posts and get the json version
+## Development
+
+Install mailcatcher gem outside of your gem bundle
+`$ gem install mailcatcher`
+
+
+Start mailcatcher gem
+`$ mailcatcher`
+
+
+Install gems
+`$ bundle install --without production --path .gems`
