@@ -12,12 +12,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 gem 'slim'
 gem 'factory_girl_rails'
-gem 'shoulda-matchers'
-gem 'sqlite3'
+gem 'shoulda-matchers', '~> 2.8'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'sqlite3'
 end
 
 group :development do
