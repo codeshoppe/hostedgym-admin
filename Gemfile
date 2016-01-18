@@ -16,11 +16,13 @@ gem 'shoulda-matchers', '~> 2.8'
 gem 'sendgrid-ruby'
 gem 'devise'
 gem 'compass-rails', github: 'compass/compass-rails', branch: 'master'
+gem 'braintree'
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'sqlite3'
+  gem 'figaro'
 end
 
 group :development do
