@@ -17,6 +17,7 @@ gem 'sendgrid-ruby'
 gem 'devise'
 gem 'compass-rails', github: 'compass/compass-rails', branch: 'master'
 gem 'braintree'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'
