@@ -15,7 +15,7 @@ class ContactMessage
     client = SendGrid::Client.new(api_key: ENV['sendgrid_api_key'])
     mail = SendGrid::Mail.new(
       to: email,
-      from: ENV['opengymsf_recepient'],
+      from: ENV['CONTACT_MESSAGE_RECIPIENT'],
       subject: subject,
       text: message
     )
