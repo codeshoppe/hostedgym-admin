@@ -1,0 +1,18 @@
+h1 Accounts
+
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th Email
+      th First Name
+      th Last Name
+      th Payment Customer ID
+      th
+  tbody
+    - @accounts.each do |account|
+      tr
+        td = account.email
+        td = account.first_name
+        td = account.last_name
+        td = account.braintree_customer.customer_id
+        td = link_to 'Edit', edit_account_path(account)

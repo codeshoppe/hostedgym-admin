@@ -1,0 +1,10 @@
+h1 = "Customer: #{@account.first_name} #{@account.last_name}"
+p = "Braintree Customer ID: #{@account.braintree_customer.customer_id}"
+
+.row
+  .col-md-7
+    = simple_form_for(@account.braintree_customer, url: account_path(@account), method: 'POST') do |f|
+      input*{name: "_method", type: "hidden", value: "patch"}
+      = f.input :invited_plan_id, label: "Allow user to subscribe to this plan:", hint: "Retrieve Plan ID from Braintree"
+      hr
+      = f.submit "Invite", class: "btn btn-primary"

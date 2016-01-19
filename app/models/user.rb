@@ -9,6 +9,16 @@ class User < ActiveRecord::Base
 
   has_one :braintree_customer
 
+  scope :admins, -> { where(admin: true) }
+  scope :accounts, -> { where(admin: false) }
+
+  after_create :sync_to_payment_service
+
+  def self.policy_class
+    AccountPolicy
+  end
+
+  private
   def sync_to_payment_service
     customer_id = PaymentService::Vault.store_customer(self.email, self.first_name, self.last_name)
     if customer_id.present?
