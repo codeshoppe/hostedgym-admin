@@ -14,6 +14,7 @@ gem 'slim'
 gem 'factory_girl_rails'
 gem 'shoulda-matchers', '~> 2.8'
 gem 'sendgrid-ruby'
+gem 'figaro'
 
 group :development, :test do
   gem 'byebug'

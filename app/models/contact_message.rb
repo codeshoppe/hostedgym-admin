@@ -14,12 +14,16 @@ class ContactMessage
   def deliver!
     client = SendGrid::Client.new(api_key: ENV['sendgrid_api_key'])
     mail = SendGrid::Mail.new(
-      to: email,
-      from: ENV['opengymsf_recepient'],
+      to: ENV['opengymsf_recipient'],
+      from: email,
       subject: subject,
       text: message
     )
     res = client.send(mail)
-    /2\d\d/.match(res.code)
+    Rails.logger.info("#{res.code} : #{res.body}")
+    if /2\d\d/.match("#{res.code}")
+      return true
+    end
+    false
   end
 end
