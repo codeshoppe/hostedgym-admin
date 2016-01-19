@@ -1,9 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
   protect_from_forgery except: :index
 
   def index
-    @articles = Article.all
+    authorize Article
+    @articles = article_collection
     respond_to do |format|
       format.html { render :index }
       format.js { render json: { articles: @articles }, callback: params[:callback] }
@@ -14,14 +17,16 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @article = article_collection.new
+    authorize @article
   end
 
   def edit
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = article_collection.new(article_params)
+    authorize @article
 
     respond_to do |format|
       if @article.save
@@ -55,8 +60,13 @@ class ArticlesController < ApplicationController
   end
 
   private
+    def article_collection
+      @articles ||= policy_scope(Article)
+    end
+
     def set_article
-      @article = Article.find(params[:id])
+      @article = article_collection.find(params[:id])
+      authorize @article
     end
 
     def article_params
