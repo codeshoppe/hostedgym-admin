@@ -10,7 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
-gem 'slim'
+gem 'slim-rails'
 gem 'factory_girl_rails'
 gem 'shoulda-matchers', '~> 2.8'
 gem 'sendgrid-ruby'

@@ -3,6 +3,7 @@ class CreateBraintreeCustomers < ActiveRecord::Migration
     create_table :braintree_customers do |t|
       t.references :user, index: true, foreign_key: true
       t.string :customer_id
+      t.string :invited_plan_id
       t.string :subscription_id
 
       t.timestamps null: false

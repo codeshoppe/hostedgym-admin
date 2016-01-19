@@ -1,0 +1,19 @@
+h1 Join Now
+hr
+.well
+  h2 Payment Details
+  = simple_form_for :gym_membership, url: "/gym_membership/checkout", method: "POST" do
+    div#payment-form
+    input type="submit" value="Join" class="btn btn-primary"
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
+javascript:
+  // We generated a client token for you so you can test out this code
+  // immediately. In a production-ready integration, you will need to
+  // generate a client token on your server (see section below).
+  var clientToken = "#{@client_token}";
+
+  braintree.setup(clientToken, "dropin", {
+    container: "payment-form"
+  });

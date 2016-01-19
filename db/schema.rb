@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160119061919) do
   create_table "braintree_customers", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "customer_id"
+    t.string   "invited_plan_id"
     t.string   "subscription_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
