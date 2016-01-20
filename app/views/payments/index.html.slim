@@ -1,0 +1,15 @@
+= simple_form_for :payments, url: "/payments/checkout" do
+  div#payment-form
+  input type="submit" value="Create Payment Method" class="btn btn-primary"
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
+javascript:
+  // We generated a client token for you so you can test out this code
+  // immediately. In a production-ready integration, you will need to
+  // generate a client token on your server (see section below).
+  var clientToken = "#{@client_token}";
+
+  braintree.setup(clientToken, "dropin", {
+    container: "payment-form"
+  });
