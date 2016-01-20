@@ -5,7 +5,7 @@ class GymMembershipController < ApplicationController
   before_action :skip_policy_scope
 
   def join_now
-    @client_token = Braintree::ClientToken.generate(customer_id: braintree_customer.customer_id)
+    @customer_id = braintree_customer.customer_id
   end
 
   def checkout

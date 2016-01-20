@@ -7,6 +7,8 @@ table.table.table-bordered.table-striped
       th First Name
       th Last Name
       th Payment Customer ID
+      th Invited Plan ID
+      th Subscription ID
       th
   tbody
     - @accounts.each do |account|
@@ -15,4 +17,6 @@ table.table.table-bordered.table-striped
         td = account.first_name
         td = account.last_name
         td = account.braintree_customer.customer_id
+        td = account.braintree_customer.invited_plan_id
+        td = account.braintree_customer.subscription_id
         td = link_to 'Edit', edit_account_path(account)
