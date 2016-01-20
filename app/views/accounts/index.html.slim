@@ -19,4 +19,4 @@ table.table.table-bordered.table-striped
         td = account.braintree_customer.customer_id
         td = account.braintree_customer.invited_plan_id
         td = account.braintree_customer.subscription_id
-        td = link_to 'Edit', edit_account_path(account)
+        td = link_to('Edit', edit_account_path(account)) unless account.braintree_customer.subscription_id.present?

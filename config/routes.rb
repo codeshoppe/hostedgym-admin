@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
+
   scope '/admin' do
     resources :articles
     resources :accounts
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  root "articles#index"
+  root "dashboard#index"
 
   post '/contact_messages', to: 'contact_messages#create'
   get 'payments/index'
