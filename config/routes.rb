@@ -6,8 +6,10 @@ Rails.application.routes.draw do
     resources :accounts
   end
 
-  get 'gym_membership/join_now'
-  post 'gym_membership/checkout'
+  resource :membership#, only: [:new, :create, :show]
+
+  get 'join_now', to: 'memberships#new', as: :join_now
+
 
   devise_for :users
 

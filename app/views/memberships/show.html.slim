@@ -1,0 +1,14 @@
+- if current_user.gym_member?
+  = render '_information.html.slim'
+- else
+  .text-center
+    h1 Membership
+    hr
+
+    - if current_user.invited?
+      p Whoops, it looks like you aren't a member yet.
+      = link_to 'Complete Membership', join_now_path, class: 'btn btn-red btn-large'
+    - else
+      p With a membership, you will ...
+      = link_to 'Tell Me More', join_now_path, class: 'btn btn-red btn-large'
+

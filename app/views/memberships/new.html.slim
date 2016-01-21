@@ -1,0 +1,9 @@
+.row
+  .col-md-4
+    = render 'pricing'
+  .col-md-8
+    - if current_user.invited?
+      = render 'payment', client_token: @client_token
+    - else
+      = render 'request_access'
+
