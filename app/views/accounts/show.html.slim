@@ -1,0 +1,26 @@
+h1 = "Customer: #{@account.first_name} #{@account.last_name}"
+
+table.table.table-bordered
+  tbody
+    tr
+      th style="width: 300px;" Customer ID
+      td = @account.braintree_customer.customer_id
+    tr
+      th Invited Plan ID
+      td = @account.braintree_customer.invited_plan_id
+    tr
+      th Subscription ID
+      td = @account.braintree_customer.subscription_id
+
+- if @account.braintree_customer.subscription_id.blank?
+  - if @account.braintree_customer.invited_plan_id.blank?
+    .pull-right
+      p You can invite this user to become a member.  Click here so that you can set the plan id.
+      .text-right
+        = link_to("Set Invited Plan", edit_account_path(@account), class: 'btn btn-primary')
+  - else
+    .pull-right
+      p You can update the invited plan since this user has not yet been subscribed.
+      .text-right
+        = link_to("Update Invited Plan", edit_account_path(@account), class: 'btn btn-primary')
+

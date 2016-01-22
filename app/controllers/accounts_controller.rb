@@ -6,6 +6,11 @@ class AccountsController < ApplicationController
     @accounts = account_collection
   end
 
+  def show
+    @account = account_collection.find(params[:id])
+    authorize @account
+  end
+
   def edit
     @account = account_collection.find(params[:id])
     authorize @account
@@ -15,7 +20,7 @@ class AccountsController < ApplicationController
     @account = account_collection.find(params[:id])
     authorize @account
     if @account.braintree_customer.update(update_params)
-      redirect_to edit_account_path(@account)
+      redirect_to account_path(@account)
     else
       raise Exception
     end

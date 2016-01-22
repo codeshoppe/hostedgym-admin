@@ -1,6 +1,6 @@
 h1 Accounts
 
-table.table.table-bordered.table-striped
+table.table.table-bordered
   thead
     tr
       th Email
@@ -19,4 +19,4 @@ table.table.table-bordered.table-striped
         td = account.braintree_customer.customer_id
         td = account.braintree_customer.invited_plan_id
         td = account.braintree_customer.subscription_id
-        td = link_to('Edit', edit_account_path(account)) unless account.braintree_customer.subscription_id.present?
+        td = link_to('Invite', edit_account_path(account), class: 'btn btn-primary') if account.braintree_customer.subscription_id.blank?
