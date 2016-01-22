@@ -20,3 +20,5 @@
 .gems
 
 /config/application.yml
+
+/.byebug_history

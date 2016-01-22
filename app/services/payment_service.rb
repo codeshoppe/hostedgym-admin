@@ -14,19 +14,19 @@ class PaymentService
   end
 
   class Subscription
-    def self.create(user, payment_method)
-      plan_id = braintree_customer.invited_plan_id
+    def self.create(customer_id, payment_method)
+      BraintreeCustomer.transaction do
+        customer = BraintreeCustomer.where(customer_id: customer_id, subscription_id: nil).lock(true).first
+        if customer
+          plan_id = customer.invited_plan_id
 
-      result = Braintree::Subscription.create(
-        payment_method_nonce: payment_method,
-        plan_id: plan_id
-      )
+          result = Braintree::Subscription.create(
+            payment_method_nonce: payment_method,
+            plan_id: plan_id
+          )
 
-      if result.success?
-        user.braintree_customer.update(subscription_id: result.subscription.id)
-        true
-      else
-        false
+          customer.update(subscription_id: result.subscription.id) if result.success?
+        end
       end
     end
   end

@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_account, only: [:show, :edit, :update]
 
   def index
     authorize User
@@ -7,23 +8,28 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @account = account_collection.find(params[:id])
-    authorize @account
   end
 
   def edit
-    @account = account_collection.find(params[:id])
-    authorize @account
   end
 
   def update
-    @account = account_collection.find(params[:id])
-    authorize @account
-    if @account.braintree_customer.update(update_params)
-      redirect_to account_path(@account)
-    else
-      raise Exception
+    error = nil
+
+    begin
+      braintree_customer.with_lock do
+        if braintree_customer.subscription_id.blank?
+          error = "Could not update." unless braintree_customer.update(update_params)
+        else
+          error = "This user has already accepted this invitation."
+        end
+      end
+    rescue StandardError
+      error = "Could not update."
     end
+
+    flash[:error] = error
+    redirect_to account_path(@account)
   end
 
   private
@@ -33,5 +39,14 @@ class AccountsController < ApplicationController
 
   def update_params
     params.require(:braintree_customer).permit(:invited_plan_id)
+  end
+
+  def set_account
+    @account = account_collection.find(params[:id])
+    authorize @account
+  end
+
+  def braintree_customer
+    @account.braintree_customer
   end
 end
