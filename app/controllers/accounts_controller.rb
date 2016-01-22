@@ -15,21 +15,22 @@ class AccountsController < ApplicationController
   end
 
   def update
-    error = nil
-
     begin
       braintree_customer.with_lock do
         if braintree_customer.subscription_id.blank?
-          error = "Could not update." unless braintree_customer.update(update_params)
+          if braintree_customer.update(update_params)
+            flash[:success] = "Successful update."
+          else
+            flash[:error] = "Could not update."
+          end
         else
-          error = "This user has already accepted this invitation."
+          flash[:error] = "This user has already accepted this invitation."
         end
       end
     rescue StandardError
-      error = "Could not update."
+      flash[:error] = "Could not update."
     end
 
-    flash[:error] = error
     redirect_to account_path(@account)
   end
 

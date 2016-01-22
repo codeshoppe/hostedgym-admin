@@ -3,7 +3,7 @@ h1 = "Customer: #{@account.first_name} #{@account.last_name}"
 table.table.table-bordered
   tbody
     tr
-      th style="width: 300px;" Customer ID
+      th.col-md-3 Customer ID
       td = @account.braintree_customer.customer_id
     tr
       th Invited Plan ID

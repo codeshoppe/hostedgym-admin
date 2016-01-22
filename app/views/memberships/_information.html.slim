@@ -4,13 +4,13 @@ h1
 table.table.table-bordered
   tbody
     tr
-      th style="width: 300px;" Customer ID
+      th.col-md-3 Customer ID
       td = current_user.braintree_customer.customer_id
     tr
       th Subscription ID
       td = current_user.braintree_customer.subscription_id
     tr
-      th.col-sm-3 First Bill Date
+      th First Bill Date
       td = @subscription.first_billing_date
 
     tr
