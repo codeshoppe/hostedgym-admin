@@ -6,8 +6,7 @@ Rails.application.routes.draw do
     resources :accounts
   end
 
-  resource :membership#, only: [:new, :create, :show]
-
+  resource :membership, only: [:new, :create, :show]
   get 'join_now', to: 'memberships#new', as: :join_now
 
 

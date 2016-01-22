@@ -1,3 +1,83 @@
-// Place all the styles related to the memberships controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+//colors
+$white: #fff;
+$color-block-green: #83d3c9;
+$features-border-color: #DDD;
+
+//fonts
+$font_0: Lato;
+$font_1: sans-serif;
+$radius: 4px;
+
+.pricing {
+  .plan {
+    @include border-top-left-radius($radius);
+    @include border-top-right-radius($radius);
+    border-top-right-radius: 3px;
+    overflow: hidden;
+    header {
+      background: $color-block-green;
+      text-align: center;
+      padding: 10px;
+      color: $white;
+
+      h2 {
+        font-size: 20px;
+        font-weight: 400;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+      }
+
+      .price {
+        margin-bottom: 15px;
+        * {
+          font-family: $font_0, $font_1;
+          line-height: 100%;
+        }
+        .amount {
+          font-size: 76px;
+          font-weight: 900;
+        }
+        .currency {
+          position: relative;
+          top: 16px;
+          font-size: 24px;
+          vertical-align: top;
+          margin-right: 5px;
+        }
+        .period {
+          font-size: 16px;
+          text-transform: uppercase;
+        }
+      }
+    }
+    .features {
+      list-style: none;
+      background: $white;
+      padding: 10px 35px 25px 35px;
+      border: 1px solid $features-border-color;
+      border-top: none;
+      @include border-bottom-left-radius($radius);
+      @include border-bottom-right-radius($radius);
+      margin-top: 0 !important;
+      li {
+        text-align: center;
+        padding: 15px 0;
+        border-top: 1px solid $features-border-color;
+        &:first-child {
+          border: none;
+        }
+        &.button {
+          border: none;
+          padding-bottom: 0;
+        }
+      }
+      .btn {
+        margin: 0;
+      }
+    }
+
+    footer {
+      margin-top: 10px;
+    }
+  }
+}
