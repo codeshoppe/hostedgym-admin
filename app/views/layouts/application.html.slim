@@ -33,20 +33,18 @@ html lang="en"
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{'(Admin) ' if current_user.admin?} #{current_user.email}<span class="caret"></span></a>
                 ul.dropdown-menu
                   li = link_to 'Settings', '#user_settings'
-                  li= link_to('Logout', destroy_user_session_path, :method => :delete)
+                  li = link_to('Logout', destroy_user_session_path, :method => :delete)
             - else
               li= link_to('Login', new_user_session_path)
 
-    - flash.each do |name, msg|
-      div class="text-#{name}"
-        p = msg
     .container
+      = render partial: "shared/flash_message"
       == yield
 
     footer role="contentinfo"
       .container
         address
           strong
-            small &copy; 
+            small &copy;
 
     = javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
