@@ -1,11 +1,17 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:300,400,900");
 @import url("http://fonts.googleapis.com/css?family=Roboto:100,300,400,700");
 @import "compass";
+@import "buttons";
+@import "*";
+
+body {
+  padding-top: 60px;
+}
 
 body, input, select, textarea {
   color: #000;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14pt;
+  font-family: 'Lato', sans-serif;
+  /*font-size: 10pt;*/
   font-weight: 300;
   letter-spacing: 0.025em;
   line-height: 1.75em;
@@ -214,3 +220,6 @@ footer {
   }
 }
 
+.center-block {
+  float: none;
+}

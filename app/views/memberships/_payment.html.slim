@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-body
+    h2 Payment Details
+    = simple_form_for :membership, url: membership_path, method: "POST" do
+      div#payment-form
+      input type="submit" value="Join" class="btn btn-primary"
+
+    <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
+javascript:
+  var clientToken = "#{client_token}";
+
+  braintree.setup(clientToken, "dropin", {
+    container: "payment-form"
+  });

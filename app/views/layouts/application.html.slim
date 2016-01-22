@@ -5,7 +5,6 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" rel="stylesheet" /
-    link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" rel="stylesheet" /
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -21,28 +20,31 @@ html lang="en"
           = link_to application_title, ".", class: "navbar-brand"
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav.navbar-right
-            li = link_to 'Articles', articles_path
+
 
             - if user_signed_in?
+              - if current_user.admin?
+                li = link_to 'Articles', articles_path
+                li = link_to 'Accounts', accounts_path
+              /- else
+                li = link_to 'Join Now', gym_membership_join_now_path
+
               li.dropdown
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{current_user.email}<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{'(Admin) ' if current_user.admin?} #{current_user.email}<span class="caret"></span></a>
                 ul.dropdown-menu
-                  li = link_to 'Settings', '#user_settings'
-                  li= link_to('Logout', destroy_user_session_path, :method => :delete)
+                  li = link_to 'Membership', membership_path
+                  li = link_to('Logout', destroy_user_session_path, :method => :delete)
             - else
               li= link_to('Login', new_user_session_path)
 
-    div.notice
-      = notice
-    div.alert
-      = alert
     .container
+      = render partial: "shared/flash_message"
       == yield
 
     footer role="contentinfo"
       .container
         address
           strong
-            small &copy; 
+            small &copy;
 
     = javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
