@@ -28,6 +28,15 @@ module PaymentService
         result.customer.id if result.success?
       end
     end
+
+    def self.find_customer_id(email)
+      safely_call do
+        collection = Braintree::Customer.search do |search|
+          search.email.is email
+        end
+        collection.first.id if collection.any?
+      end
+    end
   end
 
   class Subscription < Base
