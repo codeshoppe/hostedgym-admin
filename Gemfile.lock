@@ -197,6 +197,7 @@ GEM
       smtpapi (~> 0.1)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    simple_attrs (0.0.1)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -260,6 +261,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sendgrid-ruby
   shoulda-matchers (~> 2.8)
+  simple_attrs
   simple_form
   slim-rails
   spring

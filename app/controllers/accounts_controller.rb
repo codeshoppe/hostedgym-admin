@@ -11,6 +11,7 @@ class AccountsController < ApplicationController
   end
 
   def edit
+    @plans = Payment::PlanDecorator.decorate_collection(PaymentService::Plan.all)
   end
 
   def update
