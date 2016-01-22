@@ -14,6 +14,8 @@ FactoryGirl.define do
 
     password 'fakepassword&*'
 
+    confirmed_at '2012-01-01'
+
     factory :admin do
       admin true
     end
