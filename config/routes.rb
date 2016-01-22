@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
-  get 'gym_membership/join_now'
-  post 'gym_membership/checkout'
+  get 'dashboard/index'
+
+  scope '/admin' do
+    resources :articles
+    resources :accounts
+  end
+
+  resource :membership, only: [:new, :create, :show]
+  get 'join_now', to: 'memberships#new', as: :join_now
+
 
   devise_for :users
 
-  root "articles#index"
-  resources :articles
+  root "dashboard#index"
 
   post '/contact_messages', to: 'contact_messages#create'
   get 'payments/index'

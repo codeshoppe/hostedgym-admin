@@ -2,7 +2,7 @@
   .col-xs-12
     h2 Articles
 
-    table.table.table-striped
+    table.table.table-bordered
       thead
         tr
           th.col-xs-3 Title
@@ -13,7 +13,7 @@
          tr
            td = article.title
            td = article.body
-           td.pull-right.btn-toolbar
+           td.btn-toolbar
              = link_to 'Edit', edit_article_path(article), class: 'btn btn-warning btn-sm'
              = link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
     = link_to 'Create Article', new_article_path, class: 'btn btn-primary'
