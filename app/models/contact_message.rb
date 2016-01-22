@@ -20,6 +20,10 @@ class ContactMessage
       text: message
     )
     res = client.send(mail)
-    /2\d\d/.match(res.code)
+    Rails.logger.info("#{res.code} : #{res.body}")
+    if /2\d\d/.match("#{res.code}")
+      return true
+    end
+    false
   end
 end

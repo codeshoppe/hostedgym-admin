@@ -1,4 +1,6 @@
 class ContactMessagesController < ApplicationController
+  protect_from_forgery except: :create
+
   def create
     @contact_message = ContactMessage.new(params[:contact_message])
     if @contact_message.valid?

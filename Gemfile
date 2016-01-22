@@ -14,6 +14,7 @@ gem 'slim-rails'
 gem 'factory_girl_rails'
 gem 'shoulda-matchers', '~> 2.8'
 gem 'sendgrid-ruby'
+gem 'figaro'
 gem 'devise'
 gem 'compass-rails', github: 'compass/compass-rails', branch: 'master'
 gem 'braintree'
@@ -25,7 +26,6 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'sqlite3'
-  gem 'figaro'
 end
 
 group :development do
