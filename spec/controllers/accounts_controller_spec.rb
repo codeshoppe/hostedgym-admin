@@ -63,6 +63,10 @@ RSpec.describe AccountsController, type: :controller do
         end
       end
     end
+
+    describe "PUT #update" do
+      pending "Need to add specs"
+    end
   end
 
   context 'logged in as user' do

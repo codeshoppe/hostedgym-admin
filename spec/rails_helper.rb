@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'response_helper'
 require 'devise'
+require "pundit/rspec"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
