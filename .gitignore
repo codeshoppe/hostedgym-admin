@@ -19,7 +19,10 @@
 # Ignore gem folder
 .gems
 
-/config/application.yml
 
 # Ignore application configuration
 /config/application.yml
+
+/.byebug_history
+
+.DS_Store

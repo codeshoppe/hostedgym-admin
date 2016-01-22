@@ -19,6 +19,8 @@ gem 'devise'
 gem 'compass-rails', github: 'compass/compass-rails', branch: 'master'
 gem 'braintree'
 gem 'pundit'
+gem 'draper', '~> 1.3'
+gem 'simple_attrs'
 
 group :development, :test do
   gem 'byebug'

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe GymMembershipController, type: :controller do
+RSpec.describe DashboardController, type: :controller do
 
-  describe "GET #join_now" do
+  describe "GET #index" do
     it "returns http success" do
-      get :join_now
+      get :index
       expect(response).to have_http_status(:success)
     end
   end
