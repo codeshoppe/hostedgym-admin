@@ -1,4 +1,4 @@
-class PaymentService
+module PaymentService
   class PaymentServiceError < ::StandardError; end
 
   class Base
