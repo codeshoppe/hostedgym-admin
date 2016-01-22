@@ -49,12 +49,19 @@ RSpec.describe AccountsController, type: :controller do
       let(:user) { FactoryGirl.create(:user) }
       let(:other_admin) { FactoryGirl.create(:admin) }
 
+      before do
+        # Braintree::Plan is not currently supported in fake_braintree
+        fake_plan = Struct.new(:id, :price, :billing_frequency)
+        expect(Braintree::Plan).to receive(:all) { 5.times.map {|i| fake_plan.new("id_#{i}", 55, 2)} }
+      end
+
       context 'when retrieving user account' do
         before :each do
           get :edit, id: user.id
         end
 
         it "returns http success" do
+          puts response.body
           expect(response).to have_http_status(:success)
         end
 
