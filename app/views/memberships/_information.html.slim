@@ -1,1 +1,34 @@
-p Place membership information here
+h1
+  = "Membership Details: #{current_user.first_name} #{current_user.last_name}"
+
+table.table.table-bordered
+  tbody
+    tr
+      th style="width: 300px;" Customer ID
+      td = current_user.braintree_customer.customer_id
+    tr
+      th Subscription ID
+      td = current_user.braintree_customer.subscription_id
+    tr
+      th.col-sm-3 First Bill Date
+      td = @subscription.first_billing_date
+
+    tr
+      th Current Billing Period
+      td = "#{@subscription.billing_period_start_date} - #{@subscription.billing_period_end_date}"
+
+    tr
+      th Paid Through Date
+      td = @subscription.paid_through_date
+
+    tr
+      th Balance
+      td = number_to_currency @subscription.balance
+
+    tr
+      th Next Bill Date
+      td = @subscription.next_billing_date
+
+    tr
+      th Next Billing Period Amount
+      td = number_to_currency @subscription.next_billing_period_amount

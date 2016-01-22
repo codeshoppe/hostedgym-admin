@@ -12,6 +12,10 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def show
+    @subscription = PaymentService::Subscription.find(braintree_customer.customer_id, braintree_customer.subscription_id)
+  end
+
   def create
     authorize(:membership, :create?)
     payment_method = params[:payment_method_nonce]

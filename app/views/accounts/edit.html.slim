@@ -3,13 +3,20 @@ h1 = "Customer: #{@account.first_name} #{@account.last_name}"
 table.table.table-bordered
   tbody
     tr
-      th style="width: 300px;" Customer ID
+      th.col-sm-3 Customer ID
       td = @account.braintree_customer.customer_id
     tr
       th Invited Plan ID
       td
         = simple_form_for(@account.braintree_customer, url: account_path(@account), method: 'POST') do |f|
           input*{name: "_method", type: "hidden", value: "patch"}
-          = f.input :invited_plan_id, label: "Allow user to subscribe to this plan:", hint: "Retrieve Plan ID from Braintree"
+          = f.input :invited_plan_id,
+              collection: @plans,
+              include_blank: 'None',
+              label_method: :collection_label_method,
+              value_method: :collection_value_method,
+              label: 'Allow user to subscribe to this plan:'
+
+
           - action_text = @account.braintree_customer.invited_plan_id.present? ? 'Update' : 'Set'
           = f.submit action_text, class: "btn btn-primary pull-right"
