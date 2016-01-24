@@ -20,6 +20,7 @@ gem 'braintree'
 gem 'pundit'
 gem 'draper', '~> 1.3'
 gem 'simple_attrs'
+gem 'shopify_api'
 
 group :development, :test do
   gem 'byebug'
