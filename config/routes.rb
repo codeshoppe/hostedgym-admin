@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  resources :clinics
   get 'dashboard/index'
 
   scope '/admin' do
     resources :articles
     resources :accounts
+    resources :clinics
   end
 
   resource :membership, only: [:new, :create, :show]

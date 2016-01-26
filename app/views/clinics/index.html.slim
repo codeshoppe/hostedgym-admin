@@ -1,0 +1,31 @@
+h1 Listing clinics
+
+table.table.table-bordered
+  thead
+    tr
+      th Title
+      th Description
+      th Spots available
+      th Price
+      th Scheduled for
+      th Open for registration
+      th
+      th
+      th
+
+  tbody
+    - @clinics.each do |clinic|
+      tr
+        td = clinic.title
+        td = clinic.description
+        td = clinic.spots_available
+        td = clinic.price
+        td = clinic.scheduled_for
+        td = clinic.open_for_registration
+        td = link_to 'Show', clinic
+        td = link_to 'Edit', edit_clinic_path(clinic)
+        td = link_to 'Destroy', clinic, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Clinic', new_clinic_path, class: 'btn btn-primary'
