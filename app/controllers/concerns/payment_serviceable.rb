@@ -8,6 +8,6 @@ module PaymentServiceable
   protected
 
   def sync_user_to_payment_service
-    UserPaymentSync.new(current_user).sync!
+    UserPaymentSync.new(current_user).sync_customer!
   end
 end
