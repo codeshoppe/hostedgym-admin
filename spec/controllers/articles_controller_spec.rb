@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe ArticlesController, type: :controller do
   include ResponseHelper
 
+  login_admin
+
   let!(:valid_article) {
     FactoryGirl.create(:article)
   }

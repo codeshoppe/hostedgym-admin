@@ -2,14 +2,11 @@ module PaymentService
   class PaymentServiceError < ::StandardError; end
 
   class Base
-    def self.inherited(subclass)
-      subclass.include ::SimpleAttrs
-    end
-
     def self.safely_call(&block)
       begin
         yield
       rescue Braintree::BraintreeError => error
+        Rails.logger.error("BraintreeError: #{error.message}\n#{error.backtrace}")
         raise PaymentServiceError, error.class.name.demodulize
       end
     end
@@ -40,6 +37,8 @@ module PaymentService
   end
 
   class Subscription < Base
+    include ::SimpleAttrs
+
     has_simple_attr :first_billing_date
     has_simple_attr :next_billing_date
     has_simple_attr :billing_period_start_date
@@ -84,6 +83,8 @@ module PaymentService
   end
 
   class Plan < Base
+    include ::SimpleAttrs
+
     has_simple_attr :id
     has_simple_attr :price
     has_simple_attr :billing_frequency

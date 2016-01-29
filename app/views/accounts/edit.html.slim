@@ -9,7 +9,7 @@ table.table.table-bordered
       th Invited Plan ID
       td
         = simple_form_for(@account.braintree_customer, url: account_path(@account), method: 'POST') do |f|
-          input*{name: "_method", type: "hidden", value: "patch"}
+          input name='_method' type='hidden' value='patch'
           = f.input :invited_plan_id,
               collection: @plans,
               include_blank: 'None',

@@ -10,7 +10,7 @@ RSpec.describe ContactMessagesController, type: :controller do
     end
 
     it 'responds with a successful request' do
-      sendgrid_response = instance_double('SendGrid::Response', code: '200')
+      sendgrid_response = instance_double('SendGrid::Response', code: '200', body: 'some body')
       allow_any_instance_of(SendGrid::Client).to receive(:send).and_return(sendgrid_response)
 
       post :create, contact_message: contact_message_attrs
