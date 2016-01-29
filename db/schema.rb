@@ -14,12 +14,9 @@
 ActiveRecord::Schema.define(version: 20160126051402) do
 
   create_table "articles", force: :cascade do |t|
-    t.string  "title"
-    t.text    "body"
-    t.integer "author_id"
+    t.string "title"
+    t.text   "body"
   end
-
-  add_index "articles", ["author_id"], name: "index_articles_on_author_id"
 
   create_table "braintree_customers", force: :cascade do |t|
     t.string   "customer_id"

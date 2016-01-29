@@ -2,9 +2,9 @@ class AdminPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
+    @user = user
     raise Pundit::NotAuthorizedError unless @user.admin?
 
-    @user = user
     @record = record
   end
 
