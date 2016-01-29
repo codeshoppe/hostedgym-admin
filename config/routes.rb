@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  resources :clinics
-  get 'dashboard/index'
-
   scope '/admin' do
     resources :articles
     resources :accounts
     resources :clinics
   end
+
+  resources :clinics
 
   resource :membership, only: [:new, :create, :show]
   get 'join_now', to: 'memberships#new', as: :join_now
@@ -15,7 +14,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  get 'dashboard/index'
   root "dashboard#index"
-
-  post '/contact_messages', to: 'contact_messages#create'
 end

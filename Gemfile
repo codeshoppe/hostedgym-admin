@@ -10,9 +10,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 gem 'slim-rails'
-gem 'factory_girl_rails'
-gem 'shoulda-matchers', '~> 2.8'
-gem 'sendgrid-ruby'
 gem 'figaro'
 gem 'devise'
 gem 'compass-rails', github: 'compass/compass-rails', branch: 'master'
@@ -24,6 +21,8 @@ gem 'simple_attrs'
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 2.8'
+  gem 'factory_girl_rails'
   gem 'sqlite3'
 end
 
