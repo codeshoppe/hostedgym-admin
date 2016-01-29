@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get 'join_now', to: 'memberships#new', as: :join_now
 
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   root "dashboard#index"
 
