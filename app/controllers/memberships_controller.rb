@@ -4,6 +4,8 @@ class MembershipsController < ApplicationController
   before_action :skip_authorization
   before_action :skip_policy_scope
 
+  include PaymentServiceable
+
   def new
     if policy(:membership).new?
       @client_token = Braintree::ClientToken.generate(customer_id: braintree_customer.customer_id)
@@ -19,7 +21,7 @@ class MembershipsController < ApplicationController
   def create
     authorize(:membership, :create?)
     payment_method = params[:payment_method_nonce]
-    success = PaymentService::Subscription.create(braintree_customer.customer_id, payment_method)
+    success = UserPaymentSync.create_subscription!(braintree_customer.customer_id, payment_method)
 
     if !!success
       redirect_to membership_path, notice: "Success!"
