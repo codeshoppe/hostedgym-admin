@@ -5,6 +5,7 @@ RSpec.describe MembershipsController, type: :controller do
   login_user
 
   context 'GET new' do
+
     context 'when user is already a member' do
       before :each do
         expect(PaymentService::Vault).to receive(:find_customer_id) { 'fake_customer_id' }
