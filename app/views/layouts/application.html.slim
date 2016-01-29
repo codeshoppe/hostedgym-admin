@@ -25,6 +25,7 @@ html lang="en"
               - if current_user.admin?
                 li = link_to 'Articles', articles_path
                 li = link_to 'Accounts', accounts_path
+                li = link_to 'Clinics', clinics_path
               /- else
                 li = link_to 'Join Now', gym_membership_join_now_path
 

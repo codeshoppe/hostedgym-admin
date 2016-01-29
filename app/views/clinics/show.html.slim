@@ -1,0 +1,24 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @clinic.title
+p
+  strong Description:
+  = @clinic.description
+p
+  strong Spots available:
+  = @clinic.spots_available
+p
+  strong Price:
+  = @clinic.price
+p
+  strong Scheduled for:
+  = @clinic.scheduled_for
+p
+  strong Open for registration:
+  = @clinic.open_for_registration
+
+= link_to 'Edit', edit_clinic_path(@clinic)
+'|
+= link_to 'Back', clinics_path

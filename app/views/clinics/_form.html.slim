@@ -1,0 +1,13 @@
+= simple_form_for(@clinic) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+    = f.input :spots_available
+    = f.input :price
+    = f.input :scheduled_for
+    = f.input :open_for_registration
+
+  .form-actions
+    = f.button :submit

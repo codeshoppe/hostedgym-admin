@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119061919) do
+ActiveRecord::Schema.define(version: 20160126051402) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20160119061919) do
     t.string   "subscription_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "clinics", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "spots_available"
+    t.decimal  "price"
+    t.datetime "scheduled_for"
+    t.boolean  "open_for_registration", default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
