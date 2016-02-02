@@ -13,7 +13,7 @@ module PaymentService
     has_simple_attr :next_billing_period_amount
     has_simple_attr :days_past_due
 
-    def self.create(customer_id, payment_method, plan_id)
+    def self.create(payment_method, plan_id)
       safely_call do
         Braintree::Subscription.create(
           payment_method_nonce: payment_method,

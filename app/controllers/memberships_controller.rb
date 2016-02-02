@@ -21,7 +21,7 @@ class MembershipsController < ApplicationController
   def create
     authorize(:membership, :create?)
     payment_method = params[:payment_method_nonce]
-    success = UserPaymentSync.create_subscription!(braintree_customer.customer_id, payment_method)
+    success = UserPaymentSync.new(current_user).create_subscription!(payment_method)
 
     if !!success
       redirect_to membership_path, notice: "Success!"

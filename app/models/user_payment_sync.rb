@@ -20,15 +20,18 @@ class UserPaymentSync
     braintree_customer.save
   end
 
-  def create_subscription!
+  def create_subscription!(payment_method)
     BraintreeCustomer.transaction do
-      braintree_customer = BraintreeCustomer.where(customer_id: customer_id, subscription_id: nil).lock(true).first
+      braintree_customer_id = user.braintree_customer.customer_id
+
+      braintree_customer = BraintreeCustomer.where(customer_id: braintree_customer_id, subscription_id: nil).lock(true).first
+
       if braintree_customer
         plan_id = braintree_customer.invited_plan_id
 
         raise NoInvitation, "User[#{user.id}] - No invitation" if plan_id.blank?
 
-        result = PaymentService::Subscription.create(payment_method_nonce: payment_method, plan_id: plan_id)
+        result = PaymentService::Subscription.create(payment_method, plan_id)
         braintree_customer.update(subscription_id: result.subscription.id) if result.success?
       end
     end

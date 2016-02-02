@@ -37,4 +37,65 @@ describe UserPaymentSync do
       expect(user.braintree_customer.customer_id).to eq('new_customer_id')
     end
   end
+
+  context '#create_subscription!' do
+    let(:fake_payment) { double(:payment) }
+
+    context 'when user is already a member' do
+      let(:user) { FactoryGirl.create(:gym_member) }
+
+      it 'will not create a subscription if user already has a subscription' do
+        syncer = UserPaymentSync.new(user)
+        expect(PaymentService::Subscription).not_to receive(:create)
+        syncer.create_subscription!(fake_payment)
+      end
+    end
+
+    context 'when user is not a member' do
+
+      context 'when a user is invited' do
+        let(:user) { FactoryGirl.create(:user_invited) }
+        let(:fake_subscription) {
+          OpenStruct.new(
+            subscription: OpenStruct.new(id: 'new_subscription_id')
+          )
+        }
+
+        it 'will not create a subscription if user becomes invited before completion' do
+          expect(user.braintree_customer.subscription_id).to be_blank
+
+          syncer = UserPaymentSync.new(user)
+          user.braintree_customer.update_column(:subscription_id, 'fake_subscription_id')
+
+          expect(PaymentService::Subscription).not_to receive(:create)
+          syncer.create_subscription!(fake_payment)
+        end
+
+        it 'will create a subscription' do
+          expect(user.braintree_customer.subscription_id).to be_blank
+
+          syncer = UserPaymentSync.new(user)
+
+          expect(PaymentService::Subscription).to receive(:create) { fake_subscription }
+          syncer.create_subscription!(fake_payment)
+          user.reload
+          user.braintree_customer.subscription_id = 'new_subscription_id'
+        end
+
+      end
+
+      context 'when a user is not invited' do
+        let(:user) { FactoryGirl.create(:user_synced_to_braintree) }
+
+        it 'will raise NoInvitation error if user is not invited' do
+          syncer = UserPaymentSync.new(user)
+          expect {
+            syncer.create_subscription!(fake_payment)
+          }.to raise_error(UserPaymentSync::NoInvitation)
+        end
+      end
+    end
+
+
+  end
 end
