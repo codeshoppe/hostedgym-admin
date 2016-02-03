@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sync_to_payment_service
     if resource.persisted?
-      resource.braintree_customer.create!
+      resource.create_braintree_customer
 
       begin
         UserPaymentSync.new(resource).sync_customer!

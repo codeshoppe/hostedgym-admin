@@ -31,4 +31,8 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || root_path)
   end
 
+  def sync_user_to_payment_service(user)
+    UserPaymentSync.new(user).sync_customer!
+  end
+
 end

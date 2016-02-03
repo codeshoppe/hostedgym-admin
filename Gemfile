@@ -18,6 +18,7 @@ gem 'pundit'
 gem 'draper', '~> 1.3'
 gem 'simple_attrs'
 
+
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
@@ -28,6 +29,7 @@ end
 
 group :test do
   gem 'fake_braintree'
+  gem 'simplecov', require: false
 end
 
 group :development do
