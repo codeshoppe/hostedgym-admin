@@ -15,12 +15,18 @@ class MembershipsController < ApplicationController
   end
 
   def show
-    @subscription = PaymentService::Subscription.find(braintree_customer.customer_id, braintree_customer.subscription_id)
+    @subscription = PaymentService::Subscription.find(braintree_customer.customer_id, braintree_customer.subscription_id) if current_user.gym_member?
   end
 
   def create
     authorize(:membership, :create?)
     payment_method = params[:payment_method_nonce]
+
+    if payment_method.blank?
+      flash[:error] = "Invalid payment method."
+      raise Exception
+    end
+
     success = UserPaymentSync.new(current_user).create_subscription!(payment_method)
 
     if !!success
