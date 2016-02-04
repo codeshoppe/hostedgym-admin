@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
             flash[:error] = "Could not update."
           end
         else
-          flash[:error] = "This user has already accepted this invitation."
+          flash[:error] = "This user already has a membership."
         end
       end
     rescue StandardError

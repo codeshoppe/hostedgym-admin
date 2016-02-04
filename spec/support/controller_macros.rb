@@ -10,6 +10,7 @@ module ControllerMacros
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
       sign_in signed_in_user
+      expect(signed_in_user).to be_admin
     end
   end
 
