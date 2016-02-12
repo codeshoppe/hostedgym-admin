@@ -1,5 +1,7 @@
 module PaymentService
   class Vault < Base
+    class EmailAddressNotUniqueError < StandardError; end
+
     def self.store_customer(email, first_name, last_name)
       safely_call do
         sync_attrs = {
@@ -7,7 +9,6 @@ module PaymentService
           first_name: first_name,
           last_name: last_name
         }
-
         result = Braintree::Customer.create(sync_attrs)
         result.customer.id if result.success?
       end
@@ -18,7 +19,12 @@ module PaymentService
         collection = Braintree::Customer.search do |search|
           search.email.is email
         end
-        collection.first.id if collection.any?
+
+        if collection.size == 1
+          collection.first.id
+        elsif collection.size > 1
+          raise EmailAddressNotUniqueError, "Email: #{email}"
+        end
       end
     end
   end
