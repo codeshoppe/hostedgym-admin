@@ -4,6 +4,8 @@ class MembershipsController < ApplicationController
   before_action :skip_authorization
   before_action :skip_policy_scope
 
+  include PaymentServiceable
+
   def new
     if policy(:membership).new?
       @client_token = Braintree::ClientToken.generate(customer_id: braintree_customer.customer_id)
@@ -13,13 +15,19 @@ class MembershipsController < ApplicationController
   end
 
   def show
-    @subscription = PaymentService::Subscription.find(braintree_customer.customer_id, braintree_customer.subscription_id)
+    @subscription = PaymentService::Subscription.find(braintree_customer.customer_id, braintree_customer.subscription_id) if current_user.gym_member?
   end
 
   def create
     authorize(:membership, :create?)
     payment_method = params[:payment_method_nonce]
-    success = PaymentService::Subscription.create(braintree_customer.customer_id, payment_method)
+
+    if payment_method.blank?
+      flash[:error] = "Invalid payment method."
+      raise Exception
+    end
+
+    success = UserPaymentSync.new(current_user).create_subscription!(payment_method)
 
     if !!success
       redirect_to membership_path, notice: "Success!"

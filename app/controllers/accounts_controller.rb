@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
 
   def index
     authorize User
-    @accounts = account_collection
+    @accounts = AccountDecorator.decorate_collection(account_collection)
   end
 
   def show
@@ -24,7 +24,7 @@ class AccountsController < ApplicationController
             flash[:error] = "Could not update."
           end
         else
-          flash[:error] = "This user has already accepted this invitation."
+          flash[:error] = "This user already has a membership."
         end
       end
     rescue StandardError
@@ -46,6 +46,8 @@ class AccountsController < ApplicationController
   def set_account
     @account = account_collection.find(params[:id])
     authorize @account
+    sync_user_to_payment_service(@account)
+    @account = AccountDecorator.decorate(@account)
   end
 
   def braintree_customer

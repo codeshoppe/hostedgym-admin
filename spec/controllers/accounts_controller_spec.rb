@@ -12,14 +12,14 @@ RSpec.describe AccountsController, type: :controller do
       end
 
       it "sets @accounts" do
-        users = 3.times.map { FactoryGirl.create(:user) }
+        users = 3.times.map { FactoryGirl.create(:user_synced_to_braintree) }
         get :index
         expect(assigns[:accounts].to_a).to match_array(users)
       end
     end
 
     describe "GET #show" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryGirl.create(:user_synced_to_braintree) }
       let(:other_admin) { FactoryGirl.create(:admin) }
 
       context 'when retrieving user account' do
@@ -46,7 +46,7 @@ RSpec.describe AccountsController, type: :controller do
     end
 
     describe "GET #edit" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryGirl.create(:user_synced_to_braintree) }
       let(:other_admin) { FactoryGirl.create(:admin) }
 
       before do
@@ -61,7 +61,6 @@ RSpec.describe AccountsController, type: :controller do
         end
 
         it "returns http success" do
-          puts response.body
           expect(response).to have_http_status(:success)
         end
 
@@ -72,7 +71,51 @@ RSpec.describe AccountsController, type: :controller do
     end
 
     describe "PUT #update" do
-      pending "Need to add specs"
+      login_admin
+
+      context 'when user is already a member' do
+        let!(:account) { FactoryGirl.create(:gym_member) }
+
+        it 'redirects with an error' do
+          put :update, id: account.id, braintree_customer: {invited_plan_id: 'fake plan'}
+          expect(flash[:error]).to eq('This user already has a membership.')
+          expect(response).to redirect_to(account_path(account))
+        end
+      end
+
+      context 'when user is not a member' do
+        let!(:account) { FactoryGirl.create(:user_synced_to_braintree) }
+
+        context 'and update is successful' do
+          it 'redirects with a success' do
+            put :update, id: account.id, braintree_customer: {invited_plan_id: 'fake plan'}
+            expect(flash[:success]).to eq('Successful update.')
+            expect(response).to redirect_to(account_path(account))
+          end
+
+          it 'updates the user invited plan' do
+            put :update, id: account.id, braintree_customer: {invited_plan_id: 'fake plan'}
+            account.reload
+            expect(account.braintree_customer.invited_plan_id).to eq('fake plan')
+          end
+        end
+
+        context 'and update fails' do
+          it 'redirects with an error' do
+            expect_any_instance_of(BraintreeCustomer).to receive(:update) { false }
+            put :update, id: account.id, braintree_customer: {invited_plan_id: 'fake plan'}
+            expect(flash[:error]).to eq('Could not update.')
+            expect(response).to redirect_to(account_path(account))
+          end
+
+          it 'handles update raising an error' do
+            expect_any_instance_of(BraintreeCustomer).to receive(:update) { raise StandardError }
+            put :update, id: account.id, braintree_customer: {invited_plan_id: 'fake plan'}
+            expect(flash[:error]).to eq('Could not update.')
+            expect(response).to redirect_to(account_path(account))
+          end
+        end
+      end
     end
   end
 

@@ -20,8 +20,16 @@ FactoryGirl.define do
       admin true
     end
 
-    factory :user_with_braintree_customer do
-      association :braintree_customer, strategy: :build
+    factory :user_synced_to_braintree do
+      association :braintree_customer, factory: :braintree_customer_synced
+    end
+
+    factory :user_invited do
+      association :braintree_customer, factory: :braintree_customer_invited
+    end
+
+    factory :gym_member do
+      association :braintree_customer, factory: :braintree_customer_gym_member
     end
   end
 end

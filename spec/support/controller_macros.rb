@@ -10,11 +10,12 @@ module ControllerMacros
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
       sign_in signed_in_user
+      expect(signed_in_user).to be_admin
     end
   end
 
-  def login_user
-    let(:signed_in_user) { FactoryGirl.create(:user) }
+  def login_user(user_factory = :user)
+    let(:signed_in_user) { FactoryGirl.create(user_factory) }
 
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
