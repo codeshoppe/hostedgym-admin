@@ -8,7 +8,7 @@ table.table.table-bordered
     tr
       th Invited Plan ID
       td
-        = simple_form_for(@account.braintree_customer, url: account_path(@account), method: 'POST') do |f|
+        = simple_form_for(@account.customer_account, url: account_path(@account), method: 'POST') do |f|
           input name='_method' type='hidden' value='patch'
           = f.input :invited_plan_id,
               collection: @plans,
@@ -18,5 +18,5 @@ table.table.table-bordered
               label: 'Allow user to subscribe to this plan:'
 
 
-          - action_text = @account.braintree_customer.invited_plan_id.present? ? 'Update' : 'Set'
+          - action_text = @account.customer_account.invited_plan_id.present? ? 'Update' : 'Set'
           = f.submit action_text, class: "btn btn-primary pull-right"

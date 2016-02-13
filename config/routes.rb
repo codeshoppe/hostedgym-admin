@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index', as: :dashboard
+  end
+
   scope '/admin' do
     resources :articles
     resources :accounts
@@ -14,6 +20,15 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get 'dashboard/index'
-  root "dashboard#index"
+  authenticated :user do
+    root :to => "dashboard#index", as: :authenticated_root
+  end
+
+  get 'dashboard', to: 'dashboard#index', as: :dashboard
+
+  get 'welcome', to: 'welcome#index', as: :welcome
+
+
+  root to: 'welcome#index'
+
 end

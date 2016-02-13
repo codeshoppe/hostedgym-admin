@@ -18,7 +18,7 @@ RSpec.describe MembershipsController, type: :controller do
       end
 
       context 'when user is not a member' do
-        login_user(:user_synced_to_braintree)
+        login_user(:user_synced_to_payment_service)
 
         it 'responds with success' do
           get :new
@@ -45,7 +45,7 @@ RSpec.describe MembershipsController, type: :controller do
       end
 
       context 'when user is not a member' do
-        login_user(:user_synced_to_braintree)
+        login_user(:user_synced_to_payment_service)
 
         it 'assigns @subscription' do
           expect(PaymentService::Subscription).not_to receive(:find)
@@ -67,7 +67,7 @@ RSpec.describe MembershipsController, type: :controller do
       end
 
       context 'when user is not invited' do
-        login_user(:user_synced_to_braintree)
+        login_user(:user_synced_to_payment_service)
 
         it 'create is not allowed' do
           post :create

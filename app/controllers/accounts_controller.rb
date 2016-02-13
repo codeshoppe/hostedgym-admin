@@ -16,9 +16,9 @@ class AccountsController < ApplicationController
 
   def update
     begin
-      braintree_customer.with_lock do
-        if braintree_customer.subscription_id.blank?
-          if braintree_customer.update(update_params)
+      customer_account.with_lock do
+        if customer_account.subscription_id.blank?
+          if customer_account.update(update_params)
             flash[:success] = "Successful update."
           else
             flash[:error] = "Could not update."
@@ -40,7 +40,7 @@ class AccountsController < ApplicationController
   end
 
   def update_params
-    params.require(:braintree_customer).permit(:invited_plan_id)
+    params.require(:customer_account).permit(:invited_plan_id)
   end
 
   def set_account
@@ -50,7 +50,7 @@ class AccountsController < ApplicationController
     @account = AccountDecorator.decorate(@account)
   end
 
-  def braintree_customer
-    @account.braintree_customer
+  def customer_account
+    @account.customer_account
   end
 end

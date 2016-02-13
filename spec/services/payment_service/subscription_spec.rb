@@ -1,17 +1,21 @@
 require 'rails_helper'
 
 describe PaymentService::Subscription do
+  let(:braintree_subscription) { instance_double(Braintree::Subscription) }
+  let(:fake_subscription) { instance_double(Subscription) }
+
   describe '.create' do
     it 'adds a subscription to braintree' do
-      result = described_class.create(:payment_method, 'fake plan id')
-      expect(Braintree::Subscription.find(result.subscription.id)).not_to be_blank
+      subscription = described_class.create(:payment_method, 'fake plan id')
+      expect(Braintree::Subscription.find(subscription.id)).not_to be_blank
     end
 
-    it 'returns the result from create' do
+    it 'returns a Subscription' do
       args = {payment_method_nonce: 'nonce', plan_id: 'plan_id'}
-      expect(Braintree::Subscription).to receive(:create).with(args) { :fake_subscription }
+      expect(BraintreeSubscriptionAdapter).to receive(:adapt).with(braintree_subscription) { fake_subscription }
+      expect(Braintree::Subscription).to receive(:create).with(args) { OpenStruct.new(success?: true, subscription: braintree_subscription) }
       result = described_class.create('nonce', 'plan_id')
-      expect(result).to eq(:fake_subscription)
+      expect(result).to eq(fake_subscription)
     end
 
     it 'raises a generic payment service error if braintree fails' do
@@ -37,7 +41,7 @@ describe PaymentService::Subscription do
       expect(Braintree::Customer).to receive(:find) { customer }
 
       result = described_class.find('customer_id', 'sub2')
-      expect(result).to be_kind_of(described_class)
+      expect(result).to be_kind_of(Subscription)
     end
 
     it 'returns nil if it can\'t find it' do

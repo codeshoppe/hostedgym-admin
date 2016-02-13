@@ -1,0 +1,25 @@
+dl.detail-list {
+  font-size: 0.9em;
+  overflow: auto;
+
+  dt {
+    float: left;
+    clear: left;
+    width: 25%;
+    border-top: 1px solid #e0e0e0;
+    padding: 15px 0;
+    color: #908F8F;
+    font-weight: 300;
+  }
+
+  dd {
+    float: left;
+    padding: 15px 0 15px 15px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: none;
+    min-width: 50px;
+    height: auto;
+    width: 50%;
+  }
+
+}

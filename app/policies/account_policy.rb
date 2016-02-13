@@ -10,7 +10,7 @@ class AccountPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      user.admin? ? scope.accounts : scope.none
+      user.admin? ? scope.customers : scope.none
     end
   end
 

@@ -8,14 +8,14 @@ class MembershipsController < ApplicationController
 
   def new
     if policy(:membership).new?
-      @client_token = Braintree::ClientToken.generate(customer_id: braintree_customer.customer_id)
+      @client_token = Braintree::ClientToken.generate(customer_id: customer_account.customer_id)
     else
       redirect_to membership_path, notice: "You already have a membership."
     end
   end
 
   def show
-    @subscription = PaymentService::Subscription.find(braintree_customer.customer_id, braintree_customer.subscription_id) if current_user.gym_member?
+    @subscription = PaymentService::Subscription.find(customer_account.customer_id, customer_account.subscription_id) if current_user.gym_member?
   end
 
   def create
@@ -38,8 +38,8 @@ class MembershipsController < ApplicationController
   end
 
   private
-  def braintree_customer
-    current_user.braintree_customer
+  def customer_account
+    current_user.customer_account
   end
 
 end

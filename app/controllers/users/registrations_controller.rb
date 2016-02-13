@@ -5,11 +5,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sync_to_payment_service
     if resource.persisted?
-      resource.create_braintree_customer
+      resource.create_customer_account
 
       begin
         UserPaymentSync.new(resource).sync_customer!
-      rescue PaymentServiceError => e
+      rescue PaymentService::PaymentServiceError => e
         Rails.error.log("New user could not sync to payment service, #{e} #{e.backtrace}")
       end
     end
