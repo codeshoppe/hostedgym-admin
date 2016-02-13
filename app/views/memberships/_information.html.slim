@@ -1,11 +1,10 @@
 section#membership
   header.bold
-    h1
-      = "Membership Details: #{current_user.first_name} #{current_user.last_name}"
+    h1 = "Membership"
 
 
 section#customer-details
-  header.bold
+  header
     h2
       = "Customer Details"
   dl.detail-list
@@ -17,7 +16,7 @@ section#customer-details
 
 
 section#subscription-details
-  header.bold
+  header
     h2
       = "Subscription Details"
 
@@ -42,3 +41,22 @@ section#subscription-details
 
     dt Next Billing Period Amount
     dd = number_to_currency @subscription.next_billing_period_amount
+
+section#subscription-details
+  header
+    h2
+      = "Transactions"
+
+  table.table.table-bordered
+    thead
+      tr
+        th Transaction Date
+        th ID
+        th Amount
+    tbody
+      - @subscription.transactions.each do |transaction|
+        tr
+          td = transaction.transaction_date
+          td = transaction.id
+          td = number_to_currency transaction.amount
+

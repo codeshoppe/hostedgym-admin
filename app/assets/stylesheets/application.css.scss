@@ -2,6 +2,15 @@
 @import url("http://fonts.googleapis.com/css?family=Roboto:100,300,400,700");
 @import "compass";
 @import "buttons";
+
+
+// Scaffolding
+$ext-color: black;
+
+// Typography
+$font-size-base: 14px;
+$font-family-sans-serif: 'Roboto', sans-serif;
+
 @import "bootstrap";
 @import "*";
 
@@ -10,9 +19,6 @@ body {
 }
 
 body, input, select, textarea {
-  color: #000;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14pt;
   font-weight: 300;
   letter-spacing: 0.025em;
   line-height: 1.75em;
@@ -23,18 +29,27 @@ input[type=checkbox] {
 }
 
 section {
+  margin-top: 30px;
+
   p {
     font-size: 0.9em;
   }
 
-  header.bold {
+  header {
+    &.bold {
+      h1, h2 {
+        font-weight: 900;
+      }
+    }
+
     h1, h2 {
+      font-weight: normal;
       font-family: 'Lato', sans-serif;
-      font-weight: 900;
       text-transform: uppercase;
-      font-size: 1.3em;
       letter-spacing: 0.2em;
     }
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.2em; }
   }
 }
 
@@ -48,6 +63,7 @@ section {
 }
 
 nav {
+  font-size: 16px;
   background-color: #FFF;
   @include box-shadow(0 1px 2px 0 rgba(0, 0, 0, 0.075));
 
@@ -92,12 +108,15 @@ footer {
   }
 
   body, input, select, textarea {
-    font-size: 12pt;
+    /*font-size: 12pt;*/
   }
 }
 @media (min-width: 992px) {
   .container {
     width: 880px;
+  }
+  body, input, select, textarea {
+    /*font-size: 12pt;*/
   }
 }
 
@@ -107,30 +126,6 @@ footer {
   }
 
   body, input, select, textarea {
-    font-size: 14pt;
+    /*font-size: 14pt;*/
   }
 }
-
-@media screen and (max-width: $screen-sm-min) {
-  #banner .inner {
-    padding: 2em;
-    header h2 {
-      font-size: 2em;
-    }
-
-  }
-}
-
-@media screen and (max-width: $screen-xs-min) {
-  #banner .inner {
-    header h2 {
-      font-size: 1.2em;
-      font-weight: 700;
-    }
-
-    address {
-      font-size: 0.8em;
-    }
-  }
-}
-
