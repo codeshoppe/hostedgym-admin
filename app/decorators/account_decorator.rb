@@ -10,9 +10,9 @@ class AccountDecorator < Draper::Decorator
   #     end
   #   end
 
-  delegate :customer_id, :invited_plan_id, :subscription_id, to: :braintree_customer
+  delegate :customer_id, :invited_plan_id, :subscription_id, to: :customer_account
 
-  def braintree_customer
-    object.braintree_customer || object.create_braintree_customer!
+  def customer_account
+    object.customer_account || object.create_customer_account!
   end
 end

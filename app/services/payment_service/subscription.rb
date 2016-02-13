@@ -19,7 +19,7 @@ module PaymentService
           payment_method_nonce: payment_method,
           plan_id: plan_id
         )
-        BraintreeSubscriptionAdapter.new(result.subscription) if result.success?
+        BraintreeSubscriptionAdapter.adapt(result.subscription) if result.success?
       end
     end
 

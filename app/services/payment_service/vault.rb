@@ -20,7 +20,6 @@ module PaymentService
           search.email.is email
         end
 
-        debugger
         if collection.count == 1
           collection.first.id
         elsif collection.count > 1

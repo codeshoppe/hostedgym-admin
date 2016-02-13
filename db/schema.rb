@@ -14,19 +14,8 @@
 ActiveRecord::Schema.define(version: 20160213192126) do
 
   create_table "articles", force: :cascade do |t|
-    t.string  "title"
-    t.text    "body"
-    t.integer "author_id"
-  end
-
-  add_index "articles", ["author_id"], name: "index_articles_on_author_id"
-
-  create_table "braintree_customers", force: :cascade do |t|
-    t.string   "customer_id"
-    t.string   "invited_plan_id"
-    t.string   "subscription_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string "title"
+    t.text   "body"
   end
 
   create_table "clinics", force: :cascade do |t|
@@ -41,10 +30,9 @@ ActiveRecord::Schema.define(version: 20160213192126) do
   end
 
   create_table "customer_accounts", force: :cascade do |t|
-    t.integer  "customer_id"
+    t.string   "customer_id"
     t.string   "invited_plan_id"
     t.string   "subscription_id"
-    t.string   "type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

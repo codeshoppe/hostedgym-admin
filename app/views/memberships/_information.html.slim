@@ -13,16 +13,18 @@ section#customer-details
     dd = "#{current_user.first_name} #{current_user.last_name}"
 
     dt Customer ID
-    dd = current_user.braintree_customer.customer_id
+    dd = current_user.customer_account.customer_id
 
 
 section#subscription-details
   header.bold
     h2
-      = "Customer Details"
+      = "Subscription Details"
+
   dl.detail-list
     dt Subscription ID
-    dd = current_user.braintree_customer.subscription_id
+    dd = current_user.customer_account.subscription_id
+
     dt First Bill Date
     dd = @subscription.first_billing_date
 

@@ -2,6 +2,7 @@ class Subscription
   include ::SimpleAttrs
 
   # Subscription Details
+  has_simple_attr :id
   has_simple_attr :status
   has_simple_attr :days_past_due
   has_simple_attr :price

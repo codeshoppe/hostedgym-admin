@@ -4,16 +4,16 @@ table.table.table-bordered
   tbody
     tr
       th.col-md-3 Customer ID
-      td = @account.braintree_customer.customer_id
+      td = @account.customer_account.customer_id
     tr
       th Invited Plan ID
-      td = @account.braintree_customer.invited_plan_id
+      td = @account.customer_account.invited_plan_id
     tr
       th Subscription ID
-      td = @account.braintree_customer.subscription_id
+      td = @account.customer_account.subscription_id
 
-- if @account.braintree_customer.subscription_id.blank?
-  - if @account.braintree_customer.invited_plan_id.blank?
+- if @account.customer_account.subscription_id.blank?
+  - if @account.customer_account.invited_plan_id.blank?
     .pull-right
       p You can invite this user to become a member.  Click here so that you can set the plan id.
       .text-right
