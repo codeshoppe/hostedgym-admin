@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe Payment::PlanDecorator do
 
-  let(:plan_1_month) { PaymentService::Plan.new(id: '456', price: BigDecimal.new("56.78"), billing_frequency: 1) }
-  let(:plan_2_month) { PaymentService::Plan.new(id: '456', price: BigDecimal.new("56.78"), billing_frequency: 2) }
+  let(:plan_1_month) { Plan.new(id: '456', price: BigDecimal.new("56.78"), billing_frequency: 1) }
+  let(:plan_2_month) { Plan.new(id: '456', price: BigDecimal.new("56.78"), billing_frequency: 2) }
 
   context '#collection_label_method' do
 
