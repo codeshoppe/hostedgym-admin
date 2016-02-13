@@ -31,8 +31,8 @@ class UserPaymentSync
 
         raise NoInvitation, "User[#{user.id}] - No invitation" if plan_id.blank?
 
-        result = PaymentService::Subscription.create(payment_method, plan_id)
-        braintree_customer.update(subscription_id: result.subscription.id) if result.success?
+        subscription = PaymentService::Subscription.create(payment_method, plan_id)
+        braintree_customer.update(subscription_id: subscription.id) if subscription.present?
       end
     end
   end

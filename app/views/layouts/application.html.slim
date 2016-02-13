@@ -4,7 +4,7 @@ html lang="en"
     title Hosted Gym
     meta name="viewport" content="width=device-width, initial-scale=1"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
-    link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" rel="stylesheet" /
+    //link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" rel="stylesheet" /
     = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
   body
@@ -26,13 +26,15 @@ html lang="en"
                 li = link_to 'Articles', articles_path
                 li = link_to 'Accounts', accounts_path
                 li = link_to 'Clinics', clinics_path
-              /- else
-                li = link_to 'Join Now', gym_membership_join_now_path
+              - else
+                - if current_user.gym_member?
+                  li = link_to 'Membership', membership_path
+                - else
+                  li = link_to 'Join Now', join_now_path
 
               li.dropdown
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{'(Admin) ' if current_user.admin?} #{current_user.email}<span class="caret"></span></a>
                 ul.dropdown-menu
-                  li = link_to 'Membership', membership_path
                   li = link_to('Logout', destroy_user_session_path, :method => :delete)
             - else
               li= link_to('Login', new_user_session_path)

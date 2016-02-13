@@ -17,6 +17,7 @@ gem 'braintree'
 gem 'pundit'
 gem 'draper', '~> 1.3'
 gem 'simple_attrs'
+gem 'bootstrap-sass'
 
 
 group :development, :test do
@@ -25,6 +26,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 2.8'
   gem 'factory_girl_rails'
   gem 'sqlite3'
+  gem 'pry-rails'
 end
 
 group :test do

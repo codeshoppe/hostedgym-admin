@@ -15,10 +15,11 @@ module PaymentService
 
     def self.create(payment_method, plan_id)
       safely_call do
-        Braintree::Subscription.create(
+        result = Braintree::Subscription.create(
           payment_method_nonce: payment_method,
           plan_id: plan_id
         )
+        BraintreeSubscriptionAdapter.new(result.subscription) if result.success?
       end
     end
 

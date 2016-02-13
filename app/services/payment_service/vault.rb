@@ -20,9 +20,10 @@ module PaymentService
           search.email.is email
         end
 
-        if collection.size == 1
+        debugger
+        if collection.count == 1
           collection.first.id
-        elsif collection.size > 1
+        elsif collection.count > 1
           raise EmailAddressNotUniqueError, "Email: #{email}"
         end
       end

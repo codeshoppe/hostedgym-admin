@@ -1,34 +1,42 @@
-h1
-  = "Membership Details: #{current_user.first_name} #{current_user.last_name}"
+section#membership
+  header.bold
+    h1
+      = "Membership Details: #{current_user.first_name} #{current_user.last_name}"
 
-table.table.table-bordered
-  tbody
-    tr
-      th.col-md-3 Customer ID
-      td = current_user.braintree_customer.customer_id
-    tr
-      th Subscription ID
-      td = current_user.braintree_customer.subscription_id
-    tr
-      th First Bill Date
-      td = @subscription.first_billing_date
 
-    tr
-      th Current Billing Period
-      td = "#{@subscription.billing_period_start_date} - #{@subscription.billing_period_end_date}"
+section#customer-details
+  header.bold
+    h2
+      = "Customer Details"
+  dl.detail-list
+    dt Customer Name
+    dd = "#{current_user.first_name} #{current_user.last_name}"
 
-    tr
-      th Paid Through Date
-      td = @subscription.paid_through_date
+    dt Customer ID
+    dd = current_user.braintree_customer.customer_id
 
-    tr
-      th Balance
-      td = number_to_currency @subscription.balance
 
-    tr
-      th Next Bill Date
-      td = @subscription.next_billing_date
+section#subscription-details
+  header.bold
+    h2
+      = "Customer Details"
+  dl.detail-list
+    dt Subscription ID
+    dd = current_user.braintree_customer.subscription_id
+    dt First Bill Date
+    dd = @subscription.first_billing_date
 
-    tr
-      th Next Billing Period Amount
-      td = number_to_currency @subscription.next_billing_period_amount
+    dt Current Billing Period
+    dd = "#{@subscription.billing_period_start_date} - #{@subscription.billing_period_end_date}"
+
+    dt Paid Through Date
+    dd = @subscription.paid_through_date
+
+    dt Balance
+    dd = number_to_currency @subscription.balance
+
+    dt Next Bill Date
+    dd = @subscription.next_billing_date
+
+    dt Next Billing Period Amount
+    dd = number_to_currency @subscription.next_billing_period_amount

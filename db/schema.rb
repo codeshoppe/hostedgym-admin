@@ -11,12 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126051402) do
+ActiveRecord::Schema.define(version: 20160213192126) do
 
   create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text   "body"
+    t.string  "title"
+    t.text    "body"
+    t.integer "author_id"
   end
+
+  add_index "articles", ["author_id"], name: "index_articles_on_author_id"
 
   create_table "braintree_customers", force: :cascade do |t|
     t.string   "customer_id"
@@ -35,6 +38,15 @@ ActiveRecord::Schema.define(version: 20160126051402) do
     t.boolean  "open_for_registration", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "customer_accounts", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.string   "invited_plan_id"
+    t.string   "subscription_id"
+    t.string   "type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,10 +72,10 @@ ActiveRecord::Schema.define(version: 20160126051402) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "admin",                  default: false, null: false
-    t.integer  "braintree_customer_id"
+    t.integer  "customer_account_id"
   end
 
-  add_index "users", ["braintree_customer_id"], name: "index_users_on_braintree_customer_id"
+  add_index "users", ["customer_account_id"], name: "index_users_on_customer_account_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

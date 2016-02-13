@@ -2,6 +2,7 @@
 @import url("http://fonts.googleapis.com/css?family=Roboto:100,300,400,700");
 @import "compass";
 @import "buttons";
+@import "bootstrap";
 @import "*";
 
 body {
@@ -10,33 +11,40 @@ body {
 
 body, input, select, textarea {
   color: #000;
-  font-family: 'Lato', sans-serif;
-  /*font-size: 10pt;*/
+  font-family: 'Roboto', sans-serif;
+  font-size: 14pt;
   font-weight: 300;
   letter-spacing: 0.025em;
   line-height: 1.75em;
 }
 
-section {
-  padding-top: 60px;
-  padding-bottom: 30px;
+input[type=checkbox] {
+  margin-top: 8px;
+}
 
+section {
   p {
     font-size: 0.9em;
   }
 
-  header.bold h2 {
-    font-family: 'Lato', sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 1.3em;
-    letter-spacing: 0.2em;
-    margin-bottom: 50px;
+  header.bold {
+    h1, h2 {
+      font-family: 'Lato', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 1.3em;
+      letter-spacing: 0.2em;
+    }
   }
 }
 
 .color-block {
   background-color: #EFEFEF;
+}
+
+.block-center {
+  float: none;
+  margin: 0 auto;
 }
 
 nav {
@@ -45,7 +53,7 @@ nav {
 
   .navbar-brand {
     color: #000;
-    font-weight: 300;
+    font-weight: bold;
   }
 
   .navbar-nav {
@@ -64,118 +72,16 @@ nav {
       background-color: #000;
     }
   }
-}
 
-
-#banner {
-  background-attachment: scroll, scroll, scroll, fixed;
-  cursor: default;
-  padding: 6em 0;
-  text-align: center;
-
-  .inner {
-    display: inline-block;
-    padding: 3em;
-    text-align: center;
-
-    header {
-      display: inline-block;
-      margin: 0;
-      padding: 3px 0 3px 0;
-
-
-      h2 {
-        font-size: 3.5em;
-        font-weight: 100;
-        letter-spacing: 0.15em;
-        margin: 0;
-        padding-left: 0.05em;
-        position: relative;
-        text-transform: uppercase;
-        line-height: 1.5em;
-      }
-    }
-
-    p {
-      letter-spacing: 0.1em;
-      margin: 0;
-      text-transform: uppercase;
-
-      a {
-        color: inherit;
-        font-weight: 400;
-        text-decoration: none;
-      }
-
-
-    }
-
-    footer {
-      margin: 2em 0 0 0;
-    }
-  }
-}
-
-
-#classes {
-  background-color: #83d3c9;
-  color: white;
-
-  .offered-class {
-    padding-left: 70px;
-
-    .pic {
-      position: absolute;
-      top: 0;
-      left: 10px;
-      display: inline-block;
-      font-size: 36px;
-      text-align: center;
-      line-height: 0;
-      width: 60px;
-
-      img {
-        width: 36px;
-      }
-    }
-
-    header {
-      text-transform: uppercase;
-      font-size: 1.2em;
-      font-weight: 500;
-    }
-
-    p {
-      &.schedule {
-        font-weight: 500;
-      }
-    }
-
-    padding-bottom: 40px;
-  }
-}
-
-#about {
-  p {
-    margin-bottom: 40px;
-  }
-}
-
-#getting-started {
-  p {
-    margin-bottom: 40px;
-  }
-}
-
-#contact {
-  form {
-    max-width: 600px;
+  #navbar {
+    min-height: 50px;
+    overflow: hidden;
   }
 }
 
 footer {
   @include box-shadow(0 -2px 2px 0 rgba(0, 0, 0, 0.075));
-  padding: 3em 0;
+  padding: 2.5em 0;
   margin-top: 3em;
 }
 
@@ -184,20 +90,28 @@ footer {
   .container {
     width: 740px;
   }
+
+  body, input, select, textarea {
+    font-size: 12pt;
+  }
 }
 @media (min-width: 992px) {
   .container {
     width: 880px;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     width: 1020px;
   }
+
+  body, input, select, textarea {
+    font-size: 14pt;
+  }
 }
 
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $screen-sm-min) {
   #banner .inner {
     padding: 2em;
     header h2 {
@@ -207,7 +121,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $screen-xs-min) {
   #banner .inner {
     header h2 {
       font-size: 1.2em;
@@ -220,6 +134,3 @@ footer {
   }
 }
 
-.center-block {
-  float: none;
-}
