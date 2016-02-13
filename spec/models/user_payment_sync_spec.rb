@@ -20,7 +20,7 @@ describe UserPaymentSync do
       expect(user.customer_account.customer_id).to eq('existing_customer_id')
     end
 
-    it 'updates the braintree customer if the customer exists in vault' do
+    it 'updates the customer account if the customer exists in vault' do
       user.create_customer_account!
 
       expect(PaymentService::Vault).to receive(:find_customer_id) { 'fake_customer_id' }

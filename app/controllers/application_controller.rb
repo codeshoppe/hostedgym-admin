@@ -12,6 +12,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(User)
+      if resource.admin?
+        admin_dashboard_path
+      else
+        root_path
+      end
+    end
+  end
+
   def authenticate_admin!
     authenticate_user!
     user_not_authorized unless current_user.admin?

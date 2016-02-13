@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
 
-  belongs_to :customer_account
+  belongs_to :customer_account, dependent: :destroy
 
   scope :admins, -> { where(admin: true) }
   scope :customers, -> { where(admin: false) }

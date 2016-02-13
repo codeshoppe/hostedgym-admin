@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index', as: :dashboard
+  end
+
   scope '/admin' do
     resources :articles
     resources :accounts
