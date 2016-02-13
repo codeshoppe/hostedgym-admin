@@ -41,7 +41,7 @@ describe PaymentService::Subscription do
       expect(Braintree::Customer).to receive(:find) { customer }
 
       result = described_class.find('customer_id', 'sub2')
-      expect(result).to be_kind_of(described_class)
+      expect(result).to be_kind_of(Subscription)
     end
 
     it 'returns nil if it can\'t find it' do

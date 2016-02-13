@@ -8,7 +8,7 @@ class BraintreeSubscriptionAdapter
   end
 
   def adapt
-    transactions = @braintree_subscription.transactions.map do |braintree_transaction|
+    transactions = (@braintree_subscription.transactions || []).map do |braintree_transaction|
       BraintreeTransactionAdapter.adapt(braintree_transaction)
     end
 
