@@ -1,8 +1,8 @@
 module PaymentService
-  class Subscription < Base
+  module Subscription
 
     def self.create(payment_method, plan_id)
-      safely_call do
+      PaymentService::safely_call do
         result = Braintree::Subscription.create(
           payment_method_nonce: payment_method,
           plan_id: plan_id
@@ -12,7 +12,7 @@ module PaymentService
     end
 
     def self.find(customer_id, subscription_id)
-      safely_call do
+      PaymentService::safely_call do
         customer = Braintree::Customer.find(customer_id)
         server_subscription = customer.payment_methods.flat_map(&:subscriptions).detect do |subscription|
           subscription.id == subscription_id

@@ -1,7 +1,7 @@
 module PaymentService
-  class Plan < Base
+  module Plan
     def self.all
-      safely_call do
+      PaymentService::safely_call do
         Braintree::Plan.all.map do |plan|
           BraintreePlanAdapter.adapt(plan)
         end
