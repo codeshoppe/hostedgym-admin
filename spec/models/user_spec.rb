@@ -5,9 +5,9 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:last_name) }
   it { is_expected.to belong_to(:customer_account) }
 
-  it { is_expceted.to delegate_method(:gym_member?).to(:customer_account) }
-  it { is_expceted.to delegate_method(:invited?).to(:customer_account) }
-  it { is_expceted.to delegate_method(:can_sign_up?).to(:customer_account) }
+  it { is_expected.to delegate_method(:gym_member?).to(:customer_account) }
+  it { is_expected.to delegate_method(:invited?).to(:customer_account) }
+  it { is_expected.to delegate_method(:can_sign_up?).to(:customer_account) }
 
   context 'factories' do
     context 'factory :gym_member' do
